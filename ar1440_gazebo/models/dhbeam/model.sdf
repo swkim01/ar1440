@@ -1,0 +1,118 @@
+<?xml version='1.0'?>
+<sdf version ='1.4'>
+  <model name ='dhbeam'>
+    <static>true</static>
+    <link name='bottom'>
+      <collision name="collision_bottom">
+        <geometry><box><size>0.3 2.0 0.02</size></box></geometry>
+      </collision>
+      <collision name="collision_left">
+        <pose>-0.15 0 0.3 0 0 0</pose>
+        <geometry><box><size>0.02 2.0 0.6</size></box></geometry>
+      </collision>
+      <collision name="collision_right">
+        <pose>0.15 0 0.3 0 0 0</pose>
+        <geometry><box><size>0.02 2.0 0.6</size></box></geometry>
+      </collision>
+      <visual name="visual_bottom">
+        <geometry><box><size>0.3 2.0 0.02</size></box></geometry>
+        <material><script><name>Gazebo/Grey</name></script></material>
+      </visual>
+      <visual name="visual_left">
+        <pose>-0.15 0 0.3 0 0 0</pose>
+        <geometry><box><size>0.02 2.0 0.6</size></box></geometry>
+        <material><script><name>Gazebo/Grey</name></script></material>
+      </visual>
+      <visual name="visual_right">
+        <pose>0.15 0 0.3 0 0 0</pose>
+        <geometry><box><size>0.02 2.0 0.6</size></box></geometry>
+        <material><script><name>Gazebo/Grey</name></script></material>
+      </visual>
+      <visual name="h_beam1_bottom">
+        <pose>-0.05 0 0.02 1.5708 0 0</pose>
+	<geometry><cylinder><length>2.0</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="h_beam2_bottom">
+        <pose>0.05 0 0.02 1.5708 0 0</pose>
+	<geometry><cylinder><length>2.0</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam1_bottom">
+        <pose>0 0.8 0.02 0 1.5708 0</pose>
+	<geometry><cylinder><length>0.3</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam1_left">
+        <pose>-0.13 0.8 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam1_right">
+        <pose>0.13 0.8 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam2_bottom">
+        <pose>0 0.4 0.02 0 1.5708 0</pose>
+	<geometry><cylinder><length>0.3</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam2_left">
+        <pose>-0.13 0.4 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam2_right">
+        <pose>0.13 0.4 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam3_bottom">
+        <pose>0 0 0.02 0 1.5708 0</pose>
+	<geometry><cylinder><length>0.3</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam3_left">
+        <pose>-0.13 0 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam3_right">
+        <pose>0.13 0 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam4_bottom">
+        <pose>0 -0.4 0.02 0 1.5708 0</pose>
+	<geometry><cylinder><length>0.3</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam4_left">
+        <pose>-0.13 -0.4 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam4_right">
+        <pose>0.13 -0.4 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam5_bottom">
+        <pose>0 -0.8 0.02 0 1.5708 0</pose>
+	<geometry><cylinder><length>0.3</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam5_left">
+        <pose>-0.13 -0.8 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+      <visual name="v_beam5_right">
+        <pose>0.13 -0.8 0.32 0 0 0</pose>
+	<geometry><cylinder><length>0.6</length><radius>0.01</radius></cylinder></geometry>
+        <material><script><name>Gazebo/Black</name></script></material>
+      </visual>
+    </link>
+  </model>
+</sdf>
