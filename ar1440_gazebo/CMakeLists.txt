@@ -10,6 +10,13 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
   gazebo_ros_control
   motoman_gp12_support
+  roscpp
+  rospy
+  std_msgs
+  trajectory_msgs
+  sensor_msgs
+  industrial_msgs
+  controller_manager
 )
 
 ## System dependencies are found with CMake's conventions
