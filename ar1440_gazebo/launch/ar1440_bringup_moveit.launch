@@ -14,7 +14,7 @@
   <include file="$(find ar1440_gazebo)/launch/ar1440_trajectory_controller.launch" />    
 
   <!-- moveit launch file -->
-  <include file="$(find ar1440_config)/launch/moveit_planning_execution.launch" />    
+  <include file="$(find ar1440_moveit_config)/launch/moveit_planning_execution.launch" />    
 
 
 </launch>

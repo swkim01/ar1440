@@ -23,7 +23,7 @@ joint_state_controller:
   publish_rate: 50
 controller_manager_ns: controller_manager
 controller_list:
-  - name: ar1440/arm_joint_controller
+  - name: ar1440/ar1440_joint_controller
     action_ns: follow_joint_trajectory
     default: True
     type: FollowJointTrajectory
@@ -36,7 +36,7 @@ controller_list:
       - joint_6_t
 
 ar1440:
-  arm_joint_controller:
+  ar1440_joint_controller:
   type: position_controllers/JointTrajectoryController
   joints:
     - joint_1_s
