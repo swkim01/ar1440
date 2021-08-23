@@ -97,11 +97,12 @@ class MoveArm(object):
     ## 이 인터페이스는 모션을 계획하고 실행하는 데 사용됩니다:
     group_name = "manipulator"
     move_group = moveit_commander.MoveGroupCommander(group_name)
+    move_group.set_planning_time(2)
 
     ## Rviz에서 궤적을 표시하는 데 사용되는 `DisplayTrajectory` ROS 퍼블리셔를 생성합니다.
-    display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
-                                                   moveit_msgs.msg.DisplayTrajectory,
-                                                   queue_size=20)
+    #display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
+    #                                               moveit_msgs.msg.DisplayTrajectory,
+    #                                               queue_size=20)
 
 
     ## 기본 정보 획득
@@ -128,7 +129,7 @@ class MoveArm(object):
     self.robot = robot
     self.scene = scene
     self.move_group = move_group
-    self.display_trajectory_publisher = display_trajectory_publisher
+    #self.display_trajectory_publisher = display_trajectory_publisher
     self.planning_frame = planning_frame
     self.eef_link = eef_link
     self.group_names = group_names
@@ -182,7 +183,7 @@ class MoveArm(object):
     pose_goal.orientation.w = q[3] #0.0 #1.0
     pose_goal.position.x = 0.8 #1.0
     pose_goal.position.y = -0.2 #0.1
-    pose_goal.position.z = 0.3 #0.4
+    pose_goal.position.z = 0.5 #0.4
 
     move_group.set_pose_target(pose_goal)
 
@@ -397,13 +398,13 @@ def main():
     goal2.orientation.w = q[3] #0.0 #1.0
     goal2.position.x = 0.8 #prev: 0.8
     goal2.position.y = 0.2 #prev: -0.2
-    goal2.position.z = 0.3 #prev: 0.3
+    goal2.position.z = 0.4 #prev: 0.3
 
     cartesian_plan, fraction = tutorial.plan_cartesian_path(goal2)
 
     print("============ Press `Enter` to display a saved trajectory (this will replay the Cartesian path)  ...")
     raw_input()
-    tutorial.display_trajectory(cartesian_plan)
+    #tutorial.display_trajectory(cartesian_plan)
 
     print("============ Press `Enter` to execute a saved path ...")
     raw_input()
@@ -419,7 +420,7 @@ def main():
     goal3.orientation.w = q[3] #0.0 #1.0
     goal3.position.x = 1.2 #prev: 0.8
     goal3.position.y = -0.2 #prev: 0.2
-    goal3.position.z = 0.3 #prev: 0.3
+    goal3.position.z = 0.5 #prev: 0.3
     cartesian_plan, fraction = tutorial.plan_cartesian_path(goal3)
     tutorial.execute_plan(cartesian_plan)
 
@@ -433,7 +434,7 @@ def main():
     goal4.orientation.w = q[3] #0.0 #1.0
     goal4.position.x = 1.2 #prev: 1.2
     goal4.position.y = 0.2 #prev: -0.2
-    goal4.position.z = 0.3 #prev: 0.3
+    goal4.position.z = 0.5 #prev: 0.3
     cartesian_plan, fraction = tutorial.plan_cartesian_path(goal4)
     tutorial.execute_plan(cartesian_plan)
 
