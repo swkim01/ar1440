@@ -398,7 +398,7 @@ def main():
     goal2.orientation.w = q[3] #0.0 #1.0
     goal2.position.x = 0.8 #prev: 0.8
     goal2.position.y = 0.2 #prev: -0.2
-    goal2.position.z = 0.4 #prev: 0.3
+    goal2.position.z = 0.5 #prev: 0.3
 
     cartesian_plan, fraction = tutorial.plan_cartesian_path(goal2)
 
