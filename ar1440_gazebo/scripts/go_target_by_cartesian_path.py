@@ -221,7 +221,8 @@ class MoveArm(object):
     diffy = pose.position.y - wpose.position.y
     diffz = pose.position.z - wpose.position.z
     # 첫째경유지점: 위쪽 방향(z)으로 조금 이동한다
-    wpose.position.z += scale * 0.2 + diffz
+    if scale * 0.2 + diffz > 0:
+        wpose.position.z += scale * 0.2 + diffz
     waypoints.append(copy.deepcopy(wpose))
 
     # 둘째경유지점:  앞/뒤 방향(x) 및 옆 방향(y)로 이동한다
@@ -230,7 +231,10 @@ class MoveArm(object):
     waypoints.append(copy.deepcopy(wpose))
 
     # 셋째경유지점: 아래쪽 방향(-z)으로 조금 이동한다
-    wpose.position.z -= scale * 0.2
+    if scale * 0.2 + diffz > 0:
+        wpose.position.z -= scale * 0.2
+    else:
+        wpose.position.z += diffz
     waypoints.append(copy.deepcopy(wpose))
 
     # 카르테시안 경로를 계산한다
