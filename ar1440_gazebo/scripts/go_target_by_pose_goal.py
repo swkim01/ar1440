@@ -221,12 +221,13 @@ class MoveArm(object):
     diffy = pose.position.y - wpose.position.y
     diffz = pose.position.z - wpose.position.z
     # 첫째경유지점: 위쪽 방향(z)으로 조금 이동한다
-    wpose.position.z += scale * 0.2 + diffz
+    wpose.position.z += scale * 0.2
     waypoints.append(copy.deepcopy(wpose))
 
     # 둘째경유지점:  앞/뒤 방향(x) 및 옆 방향(y)로 이동한다
     wpose.position.x += scale * diffx
     wpose.position.y += scale * diffy
+    wpose.position.z += diffz
     waypoints.append(copy.deepcopy(wpose))
 
     # 셋째경유지점: 아래쪽 방향(-z)으로 조금 이동한다
