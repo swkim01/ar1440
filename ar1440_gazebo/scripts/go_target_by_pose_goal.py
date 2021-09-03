@@ -446,7 +446,7 @@ def main():
     print("============ Press `Enter` to begin the tutorial by setting up the moveit_commander ...")
     raw_input()
     tutorial = MoveArm()
-    tutorial.init_upright_path_constraints()
+    #tutorial.init_upright_path_constraints()
 
     print("============ Press `Enter` to execute a movement using a joint state goal ...")
     raw_input()
