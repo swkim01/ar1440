@@ -338,18 +338,18 @@ class MoveArm(object):
     ## 플래닝 씬(Planning Scene)에 객체 추가
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     ## 먼저, 플래닝 씬에 추가할 dhbeam 박스들 생성
-    box1_pose = [1.0, 0.4, 0.35, 0, 0, 0, 1]
+    box1_pose = [1.0, 0.45, 0.35, 0, 0, 0, 1]
     box1_dimensions = [1.0, 0.1, 0.7]
     self.add_box_object("box1", box1_dimensions, box1_pose)
     self.wait_for_state_update("box1", box_is_known=True, timeout=timeout)
 
-    box2_pose = [1.0, -0.4, 0.35, 0, 0, 0, 1]
+    box2_pose = [1.0, -0.45, 0.35, 0, 0, 0, 1]
     box2_dimensions = [1.0, 0.1, 0.7]
     self.add_box_object("box2", box2_dimensions, box2_pose)
     self.wait_for_state_update("box2", box_is_known=True, timeout=timeout)
 
     box3_pose = [1.0, 0.0, 0.05, 0, 0, 0, 1]
-    box3_dimensions = [1.0, 0.7, 0.1]
+    box3_dimensions = [1.0, 0.8, 0.1]
     self.add_box_object("box3", box3_dimensions, box3_pose)
     self.wait_for_state_update("box3", box_is_known=True, timeout=timeout)
 

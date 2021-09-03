@@ -98,7 +98,7 @@ class MoveArm(object):
     ## 이 인터페이스는 모션을 계획하고 실행하는 데 사용됩니다:
     group_name = "manipulator"
     move_group = moveit_commander.MoveGroupCommander(group_name)
-    #move_group.set_planning_time(2)
+    move_group.set_planning_time(5)
 
     ## Rviz에서 궤적을 표시하는 데 사용되는 `DisplayTrajectory` ROS 퍼블리셔를 생성합니다.
     #display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
@@ -227,7 +227,7 @@ class MoveArm(object):
     # 둘째경유지점:  앞/뒤 방향(x) 및 옆 방향(y)로 이동한다
     wpose.position.x += scale * diffx
     wpose.position.y += scale * diffy
-    wpose.position.z += diffz
+    wpose.position.z += scale * diffz
     waypoints.append(copy.deepcopy(wpose))
 
     # 셋째경유지점: 아래쪽 방향(-z)으로 조금 이동한다
@@ -383,18 +383,18 @@ class MoveArm(object):
     ## 플래닝 씬(Planning Scene)에 객체 추가
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     ## 먼저, 플래닝 씬에 추가할 dhbeam 박스들 생성
-    box1_pose = [1.0, 0.4, 0.35, 0, 0, 0, 1]
+    box1_pose = [1.0, 0.45, 0.35, 0, 0, 0, 1]
     box1_dimensions = [1.0, 0.1, 0.7]
     self.add_box_object("box1", box1_dimensions, box1_pose)
     self.wait_for_state_update("box1", box_is_known=True, timeout=timeout)
 
-    box2_pose = [1.0, -0.4, 0.35, 0, 0, 0, 1]
+    box2_pose = [1.0, -0.45, 0.35, 0, 0, 0, 1]
     box2_dimensions = [1.0, 0.1, 0.7]
     self.add_box_object("box2", box2_dimensions, box2_pose)
     self.wait_for_state_update("box2", box_is_known=True, timeout=timeout)
 
     box3_pose = [1.0, 0.0, 0.05, 0, 0, 0, 1]
-    box3_dimensions = [1.0, 0.7, 0.1]
+    box3_dimensions = [1.0, 0.8, 0.1]
     self.add_box_object("box3", box3_dimensions, box3_pose)
     self.wait_for_state_update("box3", box_is_known=True, timeout=timeout)
 
