@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>761</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="tab_1">
+     <attribute name="title">
+      <string>Basic</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Work</string>
+     </attribute>
+     <widget class="QGroupBox" name="dhbeamBox">
+      <property name="geometry">
+       <rect>
+        <x>29</x>
+        <y>29</y>
+        <width>351</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>DH Beam</string>
+      </property>
+      <widget class="QLabel" name="typeLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Type</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="typeComboBox">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>40</y>
+         <width>181</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="beamPosLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Position</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="beamXLabel">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>80</y>
+         <width>16</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="beamXLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>80</y>
+         <width>51</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="beamYLabel">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>80</y>
+         <width>16</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="beamYLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>80</y>
+         <width>51</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="beamZLabel">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>80</y>
+         <width>16</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Z</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="beamZLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>80</y>
+         <width>51</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="wpLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>91</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Welding Points</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="wpTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>260</y>
+         <width>311</width>
+         <height>121</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="resetButton">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>400</y>
+         <width>80</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="sendButton">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>400</y>
+         <width>80</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Send</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startButton">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>400</y>
+         <width>80</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>120</y>
+         <width>59</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Plates</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="plateTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>140</y>
+         <width>311</width>
+         <height>91</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="cameraLabel">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>30</y>
+        <width>55</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Camera</string>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="cameraView">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>50</y>
+        <width>331</width>
+        <height>241</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="robotBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>310</y>
+        <width>331</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Robot</string>
+      </property>
+      <widget class="QLabel" name="robotPosLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>71</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Current Pose</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="robotPoseDataLabel">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>40</y>
+         <width>211</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>X: 0 Y: 0 Z: 0 R: 0 P: 0 Y: 0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="jointLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>41</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Joint</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="jointComboBox">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>80</y>
+         <width>91</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="upMoveButton">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>70</y>
+         <width>41</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>UP</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="leftMoveButton">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>100</y>
+         <width>41</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>LEFT</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="rightMoveButton">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>41</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>RIGHT</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="downMoveButton">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>130</y>
+         <width>41</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>DOWN</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

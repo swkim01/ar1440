@@ -16,7 +16,10 @@ find_package(catkin REQUIRED COMPONENTS
   trajectory_msgs
   sensor_msgs
   industrial_msgs
+  geometry_msgs
+  moveit_msgs
   controller_manager
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -53,11 +56,12 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
+add_message_files(
+   FILES
+   WeldingInfo.msg
 #   Message1.msg
 #   Message2.msg
-# )
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -74,10 +78,13 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+   geometry_msgs
+   moveit_msgs
 #   gazebo_msgs
-# )
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -92,6 +99,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ar1440_gazebo
 #  CATKIN_DEPENDS gazebo_msgs gazebo_plugins gazebo_ros gazebo_ros_control mastering_ros_robot_description_pkg
+   CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
