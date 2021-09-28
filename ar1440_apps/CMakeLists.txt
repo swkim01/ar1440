@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ar1440_gazebo)
+project(ar1440_apps)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -64,11 +64,12 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
+add_service_files(
+   FILES
+   WeldingCommand.srv
 #   Service1.srv
 #   Service2.srv
-# )
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -97,7 +98,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES ar1440_gazebo
+#  LIBRARIES ar1440_apps
 #  CATKIN_DEPENDS gazebo_msgs gazebo_plugins gazebo_ros gazebo_ros_control mastering_ros_robot_description_pkg
    CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
@@ -115,19 +116,19 @@ include_directories(
 )
 
 ## Declare a cpp library
-# add_library(ar1440_gazebo
-#   src/${PROJECT_NAME}/ar1440_gazebo.cpp
+# add_library(ar1440_apps
+#   src/${PROJECT_NAME}/ar1440_apps.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(ar1440_gazebo_node src/ar1440_gazebo_node.cpp)
+# add_executable(ar1440_apps_node src/ar1440_apps_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(ar1440_gazebo_node ar1440_gazebo_generate_messages_cpp)
+# add_dependencies(ar1440_apps_node ar1440_apps_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(ar1440_gazebo_node
+# target_link_libraries(ar1440_apps_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -146,7 +147,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS ar1440_gazebo ar1440_gazebo_node
+# install(TARGETS ar1440_apps ar1440_apps_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -171,7 +172,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_ar1440_gazebo.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_ar1440_apps.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

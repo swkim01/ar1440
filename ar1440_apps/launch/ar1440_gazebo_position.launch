@@ -1,6 +1,6 @@
 <launch>
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find ar1440_gazebo)/config/ar1440_gazebo_joint_position.yaml" command="load"/>
+  <rosparam file="$(find ar1440_apps)/config/ar1440_gazebo_joint_position.yaml" command="load"/>
 
 
   <!-- load the controllers -->

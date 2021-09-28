@@ -1,0 +1,5 @@
+#plate,bottm(0)/left(1)/right(2),x,y,z,r,p,y,dx,dy,dz
+#weldingspot,bottom(0)/left(1)/right(2),x,y,z
+2,0.2,-0.4,0.3
+2,0.4,-0.4,0.3
+2,0.6,-0.4,0.3
