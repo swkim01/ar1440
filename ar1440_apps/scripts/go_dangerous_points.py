@@ -43,6 +43,7 @@
 import sys
 import copy
 import struct
+import random
 import rospy
 import moveit_commander
 import moveit_msgs.msg
@@ -235,6 +236,13 @@ class WeldingArm(object):
     current_pose = self.move_group.get_current_pose().pose
     return all_close(pose_goal, current_pose, 0.01)
 
+  def calc_pd_controller(self, e, diffe, Kp = 0.5, Kd = 0.05):
+    u = [0.0, 0.0, 0.0]
+    u[0] = Kp * e[0] + Kd * diffe[0]
+    u[1] = Kp * e[1] + Kd * diffe[1]
+    u[2] = Kp * e[2] + Kd * diffe[2]
+    return u
+
   def plan_execute_continuous_pose_goal(self, wtype, wpoint):
     # 클래스 변수를 지역 변수로 복사
     move_group = self.move_group
@@ -260,36 +268,42 @@ class WeldingArm(object):
     pose_goal.orientation.y = q[1] #0.0 #0.0
     pose_goal.orientation.z = q[2] #0.23 #0.0
     pose_goal.orientation.w = q[3] #0.0 #1.0
+    if wtype == 0: # bottom
+      pose_goal.position.z += 0.29 # offset from last link to tooltip
+    elif wtype == 1 or wtype == 2: # left or right
+      if wtype == 1: # left
+        pose_goal.position.y -= 0.2 # offset from last link to tooltip
+      else: # right
+        pose_goal.position.y += 0.2 # offset from last link to tooltip
+      pose_goal.position.z += 0.34 # offset from last link to tooltip
 
     print("Pose Goal:", pose_goal)
 
     # 몇몇 지점들을 경유하여 연속적으로 이동한다
+    pe = [0.0, 0.0, 0.0]
+    e = [0.0, 0.0, 0.0]
+    diffe = [0.0, 0.0, 0.0]
     for i in range(4):
-        point = copy.deepcopy(pose_goal)
+        current_pose = self.move_group.get_current_pose().pose
         if wtype == 0: # bottom
-            if i == 0:
-                point.position.x -= 0.02
-            elif i == 1:
-                point.position.y += 0.02
-            elif i == 2:
-                point.position.x += 0.02
-            elif i == 3:
-                point.position.y -= 0.02
-            point.position.z += 0.29 # offset from last link to tooltip
+            current_pose.position.x += 0.01 * (3-i)*random.random()
+            current_pose.position.x += 0.01 * (3-i)*random.random()
         elif wtype == 1 or wtype == 2: # left or right
-            if i == 0:
-                point.position.x -= 0.02
-            elif i == 1:
-                point.position.z += 0.02
-            elif i == 2:
-                point.position.x += 0.02
-            elif i == 3:
-                point.position.z -= 0.02
-            if wtype == 1: # left
-                point.position.y -= 0.2 # offset from last link to tooltip
-            else: # right
-                point.position.y += 0.2 # offset from last link to tooltip
-            point.position.z += 0.34 # offset from last link to tooltip
+            current_pose.position.x += 0.01 * (3-i)*random.random()
+            current_pose.position.x += 0.01 * (3-i)*random.random()
+        point = copy.deepcopy(current_pose)
+        diffx = pose_goal.position.x - current_pose.position.x
+        diffy = pose_goal.position.y - current_pose.position.y
+        diffz = pose_goal.position.z - current_pose.position.z
+
+        e = [diffx, diffy, diffz]
+        diffe[0] = e[0] - pe[0]
+        diffe[1] = e[1] - pe[1]
+        diffe[2] = e[2] - pe[2]
+        u = self.calc_pd_controller(e, diffe)
+        point.position.x += u[0]
+        point.position.y += u[1]
+        point.position.z += u[2]
 
         print("continuous point: ", point)
 
@@ -305,8 +319,9 @@ class WeldingArm(object):
 
         # 최종 로봇 위치 검사
         current_pose = self.move_group.get_current_pose().pose
-        if not all_close(point, current_pose, 0.01):
-            return False
+        pe = e
+        #if not all_close(point, current_pose, 0.01):
+        #    return False
 
     return True
 
