@@ -63,9 +63,10 @@ QLEFT = quaternion_from_euler(-3.1415, -1.0707963, 0.707963)
 #QRIGHT = quaternion_from_euler(-3.1415, -1.0707963, -0.707963)
 QRIGHT = - quaternion_from_euler(-3.1415, -1.0707963, -0.707963)
 
-# tool offset = 20cm
+# tool offset = 40cm
 TZOFFSET = 0.4
 TYOFFSET = 0.35
+TXOFFSET = 0.25
 
 # welding ready offset = 20cm
 WOFFSET = 0.2
@@ -288,7 +289,7 @@ class WeldingArm(object):
                 point.position.y -= 0.25
             else: # right
                 point.position.y += 0.25
-        point.position.z += 0.3 # offset from last link to tooltip
+        point.position.z += 0.35 # offset from last link to tooltip
 
         print("continuous point: ", point)
 
@@ -425,11 +426,14 @@ class WeldingArm(object):
       for i, wpoint in enumerate(self.weldingpoint):
         # Plan and Execute around welding point
         #print("point", i, wpoint[0], wpoint[1])
-        self.plan_execute_point(wpoint[0], wpoint[1])
+        # set - TXOFFSET to direction x
+        point = copy.deepcopy(wpoint)
+        point[1].x -= TXOFFSET
+        self.plan_execute_point(point[0], point[1])
         # Start Continuous Pose to welding point
-        self.plan_execute_continuous_pose_goal(wpoint[0], wpoint[1])
+        self.plan_execute_continuous_pose_goal(point[0], point[1])
 
-        rospy.sleep(2.0)
+        rospy.sleep(1.0)
 
   def plan_cartesian_path(self, pose, scale=1):
     # 클래스 변수를 지역 변수로 복사
@@ -593,6 +597,46 @@ class WeldingArm(object):
         # 플래닝 씬이 갱신되기를 기다린다
         self.wait_for_state_update(name, box_is_attached=False, box_is_known=False, timeout=4)
 
+  def add_weldingpoints(self, timeout=4):
+    # 클래스 변수를 지역 변수로 복사
+    scene = self.scene
+
+    ## 플래닝 씬(Planning Scene)에 객체 추가
+    ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## 먼저, 플래닝 씬에 추가할 welding point 박스들 생성
+    for i, wpoint in enumerate(self.weldingpoint):
+      name = "wp" + str(i)
+      #box_pose = plate.pose
+      box_pose = []
+      box_pose.append(wpoint[1].x)
+      box_pose.append(wpoint[1].y)
+      box_pose.append(wpoint[1].z)
+      box_pose.append(0)
+      box_pose.append(0)
+      box_pose.append(0)
+      box_pose.append(1)
+      box_dimensions = [0.02, 0.02, 0.02]
+      #if wtype == 0: # bottom
+      #elif wtype == 1: # left
+      #elif wtype == 2: # right
+      self.add_box_object(name, box_dimensions, box_pose)
+      self.wait_for_state_update(name, box_is_known=True, timeout=timeout)
+
+  def remove_weldingpoints(self, timeout=4):
+    # 클래스 변수를 지역 변수로 복사
+    scene = self.scene
+
+    ## 플래닝 씬으로부터 객체 제거
+    ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## 박스를 플래닝 씬으로부터 제거한다
+    if self.weldingpoint is not None:
+      for i, wpoint in enumerate(self.weldingpoint):
+        name = "wp" + str(i)
+        self.scene.remove_world_object(name)
+        ## 주의: 객체는 제거되기 전에 부착되었으면 탈착(detached) 한다
+        # 플래닝 씬이 갱신되기를 기다린다
+        self.wait_for_state_update(name, box_is_attached=False, box_is_known=False, timeout=4)
+
   def weldinginfo_callback(self, msg):
     # register dhbeam origin
     self.offset = msg.offset
@@ -617,6 +661,7 @@ class WeldingArm(object):
         wpoint.z += offset.z
         wtype = struct.unpack('<B', wtype)[0] # convert byte to int
         self.weldingpoint.append([wtype, wpoint])
+    self.add_weldingpoints(timeout=4)
 
   def weldingcommand(self, request):
     command = request.command
@@ -627,6 +672,7 @@ class WeldingArm(object):
 
         # remove plates from scene
         self.remove_plates(timeout=4)
+        self.remove_weldingpoints(timeout=4)
         self.plate = None
         self.weldingpoint = None
 
