@@ -237,8 +237,9 @@ class WeldingArm(object):
     current_pose = self.move_group.get_current_pose().pose
     return all_close(pose_goal, current_pose, 0.01)
 
-  def calc_pd_controller(self, e, diffe, Kp = 0.5, Kd = 0.05):
+  def calc_control_input(self, e, diffe, Kp = 0.5, Kd = 0.05):
     u = [0.0, 0.0, 0.0]
+    # calc pd controller gain
     u[0] = Kp * e[0] + Kd * diffe[0]
     u[1] = Kp * e[1] + Kd * diffe[1]
     u[2] = Kp * e[2] + Kd * diffe[2]
@@ -286,22 +287,25 @@ class WeldingArm(object):
     diffe = [0.0, 0.0, 0.0]
     for i in range(4):
         current_pose = self.move_group.get_current_pose().pose
-        if wtype == 0: # bottom
-            current_pose.position.x += 0.01 * (3-i)*random.random()
-            current_pose.position.x += 0.01 * (3-i)*random.random()
-        elif wtype == 1 or wtype == 2: # left or right
-            current_pose.position.x += 0.01 * (3-i)*random.random()
-            current_pose.position.x += 0.01 * (3-i)*random.random()
         point = copy.deepcopy(current_pose)
+
         diffx = pose_goal.position.x - current_pose.position.x
         diffy = pose_goal.position.y - current_pose.position.y
         diffz = pose_goal.position.z - current_pose.position.z
+        # add some noises
+        if wtype == 0: # bottom
+            diffx += 0.01 * (3-i)*random.random()
+            diffy += 0.01 * (3-i)*random.random()
+        elif wtype == 1 or wtype == 2: # left or right
+            diffx += 0.01 * (3-i)*random.random()
+            diffz += 0.01 * (3-i)*random.random()
 
         e = [diffx, diffy, diffz]
         diffe[0] = e[0] - pe[0]
         diffe[1] = e[1] - pe[1]
         diffe[2] = e[2] - pe[2]
-        u = self.calc_pd_controller(e, diffe)
+        u = self.calc_control_input(e, diffe)
+
         point.position.x += u[0]
         point.position.y += u[1]
         point.position.z += u[2]
