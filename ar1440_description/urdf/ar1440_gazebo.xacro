@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="ar1440" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find ar1440_description)/urdf/ar1440.xacro" /> 
-  <xacro:motoman_ar1440 prefix="" />
+  <!-- <xacro:motoman_ar1440 prefix="" /> -->
 
   <xacro:macro name="material_yaskawa_blue">
     <visual>
